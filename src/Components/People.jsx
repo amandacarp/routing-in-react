@@ -1,7 +1,9 @@
 import React from 'react';
+import {  Link } from 'react-router-dom'
+
 class People extends React.Component {
     state = {
-        people: []
+        people: null
     }
 
     componentDidMount() {
@@ -11,6 +13,13 @@ class People extends React.Component {
             .catch(e => console.log(e));
     }
     render() {
+        if(!this.state.people){
+            return(
+            <>
+            <h1>Loading...</h1>
+            </>
+            )
+        }
         return (
             <>
                 {this.state.people.map(person => {
@@ -25,7 +34,7 @@ class People extends React.Component {
                                             <p className="card-text">Person Age: {person?.age}</p>
                                             <p className="card-text">Person Gender: {person?.gender}</p>
                                             <div className="card-text">
-                                                <a href={`https://ghibliapi.herokuapp.com/people/${person?.id}`} target="_blank" rel="noreferrer">Person Link</a>
+                                            <Link to={`/people/${person?.id}`}>{person?.name}</Link>
                                             </div>
                                         </div>
                                     </div>

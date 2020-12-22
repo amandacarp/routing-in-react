@@ -4,7 +4,7 @@ import {  Link } from 'react-router-dom'
 
 class Films extends React.Component {
     state = {
-        films: []
+        films: null
     }
 
     componentDidMount() {
@@ -14,7 +14,16 @@ class Films extends React.Component {
             .catch(e => console.log(e));
     }
 
+    
+
     render() {
+        if(!this.state.films){
+            return(
+            <>
+            <h1>Loading...</h1>
+            </>
+            )
+        }
         return (
             <>
                 {this.state.films.map(film => {
@@ -30,7 +39,7 @@ class Films extends React.Component {
                                                 <p className="card-text">Film Decsription: {film?.description}</p>
                                                 <div className="card-text">
 
-                                                    <Link to={`/films/${film.id}`}>{film.title}</Link>
+                                                    <Link to={`/films/${film?.id}`}>{film?.title}</Link>
 
 
                                                 </div>
